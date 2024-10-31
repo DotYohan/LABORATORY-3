@@ -19,14 +19,14 @@ public class PlaneAndSolidMensuration {
     public static void main(String[] args) {
         // at this code the system will ask what type of function they want to use//
         boolean loop = true;
-        while (loop == true) {
+        while (loop) {
             String Fx = JOptionPane.showInputDialog("EMATH CALCULATOR"
                     + "\n What do you need to calculate?"
                     + "\n 1.Area of Circle"
                     + "\n 2.Area of Rectangle"
                     + "\n 3.Area of Triangle"
                     + "\n 4.Volume of Sphere"
-                    + "\n 5.Area of Cylinder"
+                    + "\n 5.Volume of Cylinder"
                     + "\n 6.Area of a Circle Segment"
                     + "\n 7.Missing side c of triangle"
                     + "\n 8.Sphere Surface Area");
@@ -49,9 +49,9 @@ public class PlaneAndSolidMensuration {
             //the functions of objectives//
             switch (swit) {
                 case 1:
-                    numb1 = JOptionPane.showInputDialog("Input radiuus to calculate the area of the Circle.");
+                    numb1 = JOptionPane.showInputDialog("Input radius to calculate the area of the Circle.");
                     r = Double.parseDouble(numb1);
-                    result = Math.PI * r * r;
+                    result = Math.PI * Math.pow(r, 2);
                     JOptionPane.showMessageDialog(null, "Area of Circle = " + result);
                     break;
                 case 2:
@@ -95,7 +95,7 @@ public class PlaneAndSolidMensuration {
                     a = Double.parseDouble(numb1);
                     b = Double.parseDouble(numb2);
                     anglec = Double.parseDouble(numb3);
-                    JOptionPane.showMessageDialog(null, "Area of triangle = " + calculateTriangleSide(a, b, anglec));
+                    JOptionPane.showMessageDialog(null, "Lenght of side c = " + calculateTriangleSide(a, b, anglec));
                     break;
                 case 8:
                     numb1 = JOptionPane.showInputDialog("Input radius to calculate Sphere Surface Area.");
@@ -103,6 +103,8 @@ public class PlaneAndSolidMensuration {
 
                     JOptionPane.showMessageDialog(null, "Area of Sphere Surface = " + calculateSphereSurfaceArea(r));
                     break;
+                default:
+                    JOptionPane.showMessageDialog (null, "Invalid option, please select number accordingly.");
 
             }
         }
@@ -110,27 +112,27 @@ public class PlaneAndSolidMensuration {
 
     public static double calculateCircleSegmentArea(double radius, double angle) {
         if (radius <= 0 || angle <= 0) {
-            JOptionPane.showMessageDialog(null, "Radius must be non-negative Intergers");
+            JOptionPane.showMessageDialog(null, "Radius and angle must be non-negative Intergers");
             return -1;
         }
         double Radangle = Math.toRadians(angle);
-        return ((radius * radius) / 2) * (Radangle - Math.sin(Radangle));
+        return (Math.pow(radius, 2) / 2) * (Radangle - Math.sin(Radangle));
     }
 
     public static double calculateTriangleSide(double a, double b, double AngleC) {
         if (a <= 0 && b <= 0 && AngleC <= 0 && AngleC >= 180) {
-            JOptionPane.showMessageDialog(null, "a,b, and Angle C must be non-negative Intergers and the angle must not more than 180 degrees");
+            JOptionPane.showMessageDialog(null, "a, b, and Angle C must be non-negative numbers and the angle must be less than 180 degrees.");
             return -1;
         }
         Double AngleCRadians = Math.toRadians(AngleC);
-        double c = Math.sqrt(a * a + b * b - 2 * a * b * Math.cos(AngleCRadians));
+        double c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) - 2 * a * b * Math.cos(AngleCRadians));
 
         return c;
     }
 
     public static double calculateSphereVolume(double radius) {
         if (radius <= 0) {
-            JOptionPane.showMessageDialog(null, "Angle must not less 0.");
+            JOptionPane.showMessageDialog(null, "Radius must bes greater than 0.");
             return -1;
         }
         return (4.0 / 3.0) * Math.PI * Math.pow(radius, 3);
@@ -139,7 +141,7 @@ public class PlaneAndSolidMensuration {
 
     public static double calculateSphereSurfaceArea(double radius) {
         if (radius <= 0) {
-            JOptionPane.showMessageDialog(null, "Angle must not less 0.");
+            JOptionPane.showMessageDialog(null, "Radius must bes greater than 0.");
             return -1;
         }
         return 4 * Math.PI * Math.pow(radius, 2);
